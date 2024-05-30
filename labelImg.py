@@ -1573,11 +1573,12 @@ def read(filename, default=None):
         return default
 
 
-def get_main_app(argv=[]):
+def get_main_app(argv=None):
     """
     Standard boilerplate Qt application code.
     Do everything but app.exec_() -- so that we can test the application in one thread
     """
+    argv = [] if argv is None else argv
     app = QApplication(argv)
     app.setApplicationName(__appname__)
     app.setWindowIcon(newIcon("app"))

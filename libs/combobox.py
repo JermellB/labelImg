@@ -13,7 +13,8 @@ except ImportError:
 
 
 class ComboBox(QWidget):
-    def __init__(self, parent=None, items=[]):
+    def __init__(self, parent=None, items=None):
+        items = [] if items is None else items
         super(ComboBox, self).__init__(parent)
 
         layout = QHBoxLayout()
