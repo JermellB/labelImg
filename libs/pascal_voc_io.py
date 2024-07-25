@@ -7,6 +7,7 @@ from lxml import etree
 import codecs
 from libs.constants import DEFAULT_ENCODING
 from libs.ustr import ustr
+import lxml.etree
 
 
 XML_EXT = '.xml'
@@ -28,7 +29,7 @@ class PascalVocWriter:
             Return a pretty-printed XML string for the Element.
         """
         rough_string = ElementTree.tostring(elem, 'utf8')
-        root = etree.fromstring(rough_string)
+        root = etree.fromstring(rough_string, parser=lxml.etree.XMLParser(resolve_entities=False))
         return etree.tostring(root, pretty_print=True, encoding=ENCODE_METHOD).replace("  ".encode(), "\t".encode())
         # minidom does not support UTF-8
         '''reparsed = minidom.parseString(rough_string)
