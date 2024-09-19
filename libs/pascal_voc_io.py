@@ -7,6 +7,7 @@ from lxml import etree
 import codecs
 from libs.constants import DEFAULT_ENCODING
 from libs.ustr import ustr
+import defusedxml.ElementTree
 
 
 XML_EXT = '.xml'
@@ -151,7 +152,7 @@ class PascalVocReader:
     def parseXML(self):
         assert self.filepath.endswith(XML_EXT), "Unsupport file format"
         parser = etree.XMLParser(encoding=ENCODE_METHOD)
-        xmltree = ElementTree.parse(self.filepath, parser=parser).getroot()
+        xmltree = defusedxml.ElementTree.parse(self.filepath, parser=parser).getroot()
         filename = xmltree.find('filename').text
         try:
             verified = xmltree.attrib['verified']
