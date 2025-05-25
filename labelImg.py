@@ -11,6 +11,7 @@ import subprocess
 
 from functools import partial
 from collections import defaultdict
+from security import safe_command
 
 try:
     from PyQt5.QtGui import *
@@ -646,7 +647,7 @@ class MainWindow(QMainWindow, WindowMixin):
 
     ## Callbacks ##
     def showTutorialDialog(self):
-        subprocess.Popen(self.screencastViewer + [self.screencast])
+        safe_command.run(subprocess.Popen, self.screencastViewer + [self.screencast])
 
     def showInfoDialog(self):
         from libs.__init__ import __version__
